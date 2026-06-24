@@ -1,0 +1,116 @@
+<view class="page-root">
+  <view class="nav-bar">
+    <view class="nav-back" bindtap="onTapBack">
+      <text class="nav-back-arrow">‹</text>
+    </view>
+    <text class="nav-title">选择品牌</text>
+  </view>
+
+  <!-- 搜索栏（容器静态，输入框非受控） -->
+  <view class="search-bar">
+    <view class="search-inner">
+      <text class="search-icon">🔍</text>
+      <input
+        class="search-input"
+        placeholder="搜索或输入品牌"
+        placeholder-class="search-ph"
+        bindinput="onSearchInput"
+        bindconfirm="onSearchConfirm"
+        confirm-type="done"
+      />
+    </view>
+  </view>
+
+  <view class="list-area">
+    <!-- 完整品牌列表（始终挂载） -->
+    <view class="brand-wrap">
+      <scroll-view scroll-y type="list" show-scrollbar="{{false}}" class="brand-scroll" scroll-into-view="{{scrollIntoId}}">
+        <!-- 热门品牌 -->
+        <view id="group-hot" class="brand-group">
+          <view class="group-title">热门品牌</view>
+          <view class="hot-grid">
+            <view
+              wx:for="{{hotBrands}}"
+              wx:key="name"
+              class="hot-item"
+              data-name="{{item.name}}"
+              bindtap="pickBrand"
+            >
+              <view class="hot-logo">
+                <text class="hot-logo-text">{{item.letter}}</text>
+              </view>
+              <text class="hot-name">{{item.name}}</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- A-Z 分组 -->
+        <view
+          wx:for="{{brandGroups}}"
+          wx:for-item="grp"
+          wx:key="initial"
+          id="group-{{grp.initial}}"
+          class="brand-group"
+        >
+          <view class="group-letter">{{grp.initial}}</view>
+          <view
+            wx:for="{{grp.brands}}"
+            wx:for-item="b"
+            wx:key="name"
+            class="brand-item"
+            data-name="{{b.name}}"
+            bindtap="pickBrand"
+          >
+            <view class="brand-logo">
+              <text class="brand-logo-text">{{b.letter}}</text>
+            </view>
+            <text class="brand-name">{{b.name}}</text>
+          </view>
+        </view>
+        <view style="height:40rpx;"></view>
+      </scroll-view>
+
+      <!-- 右侧字母索引 -->
+      <view class="index-bar">
+        <view
+          wx:for="{{indexBar}}"
+          wx:key="*this"
+          class="index-key"
+          data-key="{{item}}"
+          bindtap="onIndexTap"
+        >
+          <text class="index-key-text">{{item}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 搜索结果浮层（覆盖在列表上方） -->
+    <scroll-view wx:if="{{keyword}}" scroll-y type="list" show-scrollbar="{{false}}" class="search-results">
+      <!-- 自定义品牌入口 -->
+      <view class="brand-item result-custom" bindtap="useCustom">
+        <view class="brand-logo result-custom-logo">
+          <text class="brand-logo-text">+</text>
+        </view>
+        <text class="brand-name">使用「{{keyword}}」</text>
+      </view>
+
+      <view
+        wx:for="{{filtered}}"
+        wx:key="name"
+        class="brand-item"
+        data-name="{{item.name}}"
+        bindtap="pickBrand"
+      >
+        <view class="brand-logo">
+          <text class="brand-logo-text">{{item.letter}}</text>
+        </view>
+        <text class="brand-name">{{item.name}}</text>
+      </view>
+
+      <view wx:if="{{filtered.length === 0}}" class="result-empty">
+        <text>无匹配品牌，可点击上方使用自定义品牌</text>
+      </view>
+      <view style="height:40rpx;"></view>
+    </scroll-view>
+  </view>
+</view>

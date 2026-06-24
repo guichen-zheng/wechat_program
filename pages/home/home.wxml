@@ -1,0 +1,120 @@
+<!-- 固定搜索栏 -->
+<view class="search-bar-fixed" style="padding-top:{{statusBarHeight}}px;">
+  <view class="search-inner">
+    <view class="search-icon">
+      <text class="search-icon-text">🔍</text>
+    </view>
+    <input
+      class="search-input"
+      placeholder="搜索功能（如：预约洗车）"
+      placeholder-class="search-placeholder"
+      confirm-type="search"
+      bindinput="onSearchInput"
+      bindconfirm="onSearchConfirm"
+      bindblur="onSearchBlur"
+    />
+  </view>
+
+  <!-- 已选店铺 -->
+  <view class="store-tag" wx:if="{{selectedStore}}" bindtap="goFeature" data-url="/pages/store-location/store-location">
+    <text class="store-tag-text">📍 {{selectedStore.name}}</text>
+  </view>
+</view>
+
+<!-- 输入联想下拉（独立浮层，与输入框容器隔离，避免输入时重渲染打断中文组合） -->
+<view class="search-suggest" wx:if="{{suggestions.length > 0}}" style="top:{{statusBarHeight + 52}}px;">
+  <view
+    wx:for="{{suggestions}}"
+    wx:key="name"
+    class="suggest-item"
+    bindtap="onSuggestionTap"
+    data-url="{{item.url}}"
+  >
+    <text class="suggest-emoji">{{item.emoji}}</text>
+    <text class="suggest-name">{{item.name}}</text>
+    <text class="suggest-arrow">›</text>
+  </view>
+</view>
+
+<!-- 主滚动区 -->
+<scroll-view
+  class="home-scroll"
+  scroll-y
+  type="list"
+  show-scrollbar="{{false}}"
+  style="height:{{scrollViewHeight}}px; padding-top:{{statusBarHeight + 56}}px;"
+>
+  <!-- 搜索栏占位 -->
+  <view style="height:8rpx;"></view>
+
+  <!-- 轮播图 -->
+  <view class="banner-wrap">
+    <swiper
+      class="banner-swiper"
+      circular
+      autoplay
+      interval="5000"
+      duration="400"
+      indicator-dots
+      indicator-color="rgba(255,255,255,0.5)"
+      indicator-active-color="#fff"
+      current="{{currentBanner}}"
+      bindchange="onBannerChange"
+    >
+      <swiper-item wx:for="{{bannerImages}}" wx:key="*this">
+        <image class="banner-img" src="{{item}}" mode="aspectFill" />
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <!-- 功能图标 -->
+  <view class="feature-grid">
+    <view
+      wx:for="{{features}}"
+      wx:key="name"
+      class="feature-item"
+      bindtap="goFeature"
+      data-url="{{item.url}}"
+    >
+      <view class="feature-icon-wrap feature-icon-{{item.icon}}">
+        <text class="feature-icon-emoji">{{item.emoji}}</text>
+      </view>
+      <text class="feature-name">{{item.name}}</text>
+    </view>
+  </view>
+
+  <!-- 洗车计划 -->
+  <view class="section-title-wrap">
+    <text class="section-title">洗车计划</text>
+    <text class="section-sub">选择适合您的套餐</text>
+  </view>
+
+  <view class="plan-list">
+    <view
+      wx:for="{{washPlans}}"
+      wx:key="id"
+      class="plan-card"
+      bindtap="goPlanDetail"
+      data-id="{{item.id}}"
+    >
+      <view class="plan-header">
+        <view class="plan-name-row">
+          <text class="plan-name">{{item.name}}</text>
+          <view class="plan-tag" wx:if="{{item.tag}}">
+            <text>{{item.tag}}</text>
+          </view>
+        </view>
+        <text class="plan-price">¥{{item.price}}</text>
+      </view>
+      <text wx:if="{{item.description}}" class="plan-desc">{{item.description}}</text>
+      <view class="plan-footer">
+        <text class="plan-duration">{{item.duration === -1 ? '不限时长' : '约' + item.duration + '分钟'}}</text>
+        <text class="plan-arrow">立即预约 ›</text>
+      </view>
+    </view>
+  </view>
+
+  <view style="height:40rpx;"></view>
+</scroll-view>
+
+<tab-bar />

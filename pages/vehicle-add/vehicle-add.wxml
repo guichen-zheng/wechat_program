@@ -1,0 +1,138 @@
+<view class="page-root">
+  <view class="nav-bar">
+    <view class="nav-back" bindtap="onTapBack">
+      <text class="nav-back-arrow">‹</text>
+    </view>
+    <text class="nav-title">添加车辆</text>
+  </view>
+
+  <scroll-view scroll-y type="list" show-scrollbar="{{false}}" style="flex:1;overflow-y:hidden;">
+    <view class="form-wrap">
+
+      <view class="section-title">
+        <text class="section-title-text">输入车牌号</text>
+        <text class="section-sub-text">点击格子，使用下方键盘输入</text>
+      </view>
+
+      <!-- 车牌格子 -->
+      <view class="plate-row">
+        <block wx:for="{{plateChars}}" wx:key="index">
+          <!-- 标准 7 位 -->
+          <view
+            wx:if="{{index < 7}}"
+            class="plate-box {{index === activeIndex ? 'plate-box--active' : ''}}"
+            data-index="{{index}}"
+            bindtap="onBoxTap"
+          >
+            <text class="plate-box-char">{{item}}</text>
+          </view>
+
+          <!-- 第 8 位：新能源（可选） -->
+          <view
+            wx:else
+            class="plate-box plate-box--energy {{index === activeIndex ? 'plate-box--active' : ''}}"
+            data-index="{{index}}"
+            bindtap="onBoxTap"
+          >
+            <block wx:if="{{item}}">
+              <text class="plate-box-char">{{item}}</text>
+            </block>
+            <block wx:else>
+              <text class="plate-energy-plus">+</text>
+              <text class="plate-energy-label">新能源</text>
+            </block>
+          </view>
+        </block>
+      </view>
+
+      <!-- 车型选择 -->
+      <view class="car-row" bindtap="goSelectCar">
+        <text class="car-label">品牌</text>
+        <view class="car-right">
+          <text class="car-value {{carModel ? '' : 'car-value--empty'}}">{{carModel || '请选择品牌'}}</text>
+          <text class="car-arrow">›</text>
+        </view>
+      </view>
+
+      <!-- 保存 -->
+      <button class="save-btn" bindtap="save">
+        <text>保存车辆</text>
+      </button>
+
+    </view>
+    <view style="height:40rpx;"></view>
+  </scroll-view>
+
+  <!-- 自定义键盘 -->
+  <view wx:if="{{keyboardVisible}}" class="keyboard" catchtap="noop">
+    <view class="keyboard-top">
+      <text class="keyboard-tip">{{keyboardType === 'province' ? '选择省份' : (digitsDisabled ? '输入字母' : '输入字母或数字')}}</text>
+      <text class="keyboard-done" bindtap="hideKeyboard">完成</text>
+    </view>
+
+    <!-- 省份键盘（仅省份简称，不含 港澳学警领挂） -->
+    <view wx:if="{{keyboardType === 'province'}}" class="kb-pane">
+      <view class="kb-grid">
+        <view
+          wx:for="{{provinceKeys}}"
+          wx:key="*this"
+          class="kb-key"
+          data-key="{{item}}"
+          bindtap="onKeyTap"
+        >
+          <text class="kb-key-text">{{item}}</text>
+        </view>
+        <view class="kb-key kb-key--func" bindtap="onBackspace">
+          <text class="kb-key-text">⌫</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 字母数字键盘 -->
+    <view wx:else class="kb-pane">
+      <!-- 特殊字符行：仅第 7 格（新能源前一格）可用，其余置灰 -->
+      <view class="kb-grid kb-grid--row">
+        <view
+          wx:for="{{specialKeys}}"
+          wx:key="*this"
+          class="kb-key {{specialEnabled ? 'kb-key--special' : 'kb-key--disabled'}}"
+          data-key="{{item}}"
+          data-disabled="{{!specialEnabled}}"
+          bindtap="onKeyTap"
+        >
+          <text class="kb-key-text">{{item}}</text>
+        </view>
+      </view>
+      <!-- 数字行 -->
+      <view class="kb-grid kb-grid--row">
+        <view
+          wx:for="{{digitKeys}}"
+          wx:key="*this"
+          class="kb-key {{digitsDisabled ? 'kb-key--disabled' : ''}}"
+          data-key="{{item}}"
+          data-disabled="{{digitsDisabled}}"
+          bindtap="onKeyTap"
+        >
+          <text class="kb-key-text">{{item}}</text>
+        </view>
+      </view>
+      <!-- 字母 3 行 -->
+      <view wx:for="{{letterRows}}" wx:for-item="row" wx:key="id" class="kb-grid kb-grid--row">
+        <view
+          wx:for="{{row.keys}}"
+          wx:for-item="k"
+          wx:key="*this"
+          class="kb-key"
+          data-key="{{k}}"
+          bindtap="onKeyTap"
+        >
+          <text class="kb-key-text">{{k}}</text>
+        </view>
+        <!-- 退格放在最后一行末尾 -->
+        <view wx:if="{{index === 2}}" class="kb-key kb-key--func" bindtap="onBackspace">
+          <text class="kb-key-text">⌫</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

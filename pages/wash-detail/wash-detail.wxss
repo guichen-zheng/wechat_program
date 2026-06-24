@@ -1,0 +1,160 @@
+page { background: #F5F7FA; }
+
+.page-root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-bar {
+  height: calc(44px + env(safe-area-inset-top));
+  padding-top: env(safe-area-inset-top);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  padding-left: 24rpx;
+  position: relative;
+  box-shadow: 0 1rpx 0 #F0F0F0;
+}
+
+.nav-back {
+  width: 60rpx;
+  height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-back-arrow {
+  font-size: 48rpx;
+  color: #333;
+}
+
+.nav-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #1A1A1A;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.detail-hero {
+  background: linear-gradient(135deg, #1677FF 0%, #0050D0 100%);
+  padding: 48rpx 32rpx 36rpx;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.hero-price {
+  font-size: 64rpx;
+  font-weight: bold;
+  color: #fff;
+}
+
+.hero-tag {
+  background: rgba(255,255,255,0.25);
+  border-radius: 8rpx;
+  padding: 4rpx 16rpx;
+}
+
+.hero-tag text {
+  font-size: 24rpx;
+  color: #fff;
+}
+
+.detail-card {
+  background: #fff;
+  margin: 20rpx 24rpx;
+  border-radius: 20rpx;
+  padding: 0 32rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,.06);
+}
+
+.detail-row {
+  display: flex;
+  align-items: flex-start;
+  padding: 28rpx 0;
+  gap: 16rpx;
+}
+
+.detail-key {
+  font-size: 28rpx;
+  color: #999;
+  width: 140rpx;
+  flex-shrink: 0;
+}
+
+.detail-val {
+  font-size: 28rpx;
+  color: #1A1A1A;
+  flex: 1;
+  line-height: 1.6;
+}
+
+.price-val {
+  color: #FF6B35;
+  font-weight: bold;
+  font-size: 32rpx;
+}
+
+.detail-divider {
+  height: 1rpx;
+  background: #F0F0F0;
+}
+
+.section-card {
+  background: #fff;
+  margin: 0 24rpx 16rpx;
+  border-radius: 20rpx;
+  padding: 28rpx 32rpx;
+}
+
+.section-label {
+  font-size: 26rpx;
+  color: #999;
+  margin-bottom: 16rpx;
+  display: block;
+}
+
+.picker-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.picker-val {
+  font-size: 30rpx;
+  color: #1A1A1A;
+  font-weight: 500;
+}
+
+.picker-empty {
+  color: #BFBFBF;
+  font-weight: normal;
+}
+
+.picker-arrow {
+  font-size: 36rpx;
+  color: #BFBFBF;
+}
+
+.bottom-bar {
+  padding: 20rpx 24rpx calc(20rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  box-shadow: 0 -2rpx 12rpx rgba(0,0,0,.06);
+}
+
+.book-btn {
+  background: #1677FF;
+  color: #fff;
+  border-radius: 16rpx;
+  height: 96rpx;
+  line-height: 96rpx;
+  font-size: 34rpx;
+  font-weight: bold;
+  border: none;
+  width: 100%;
+}
+
+.book-btn::after { border: none; }

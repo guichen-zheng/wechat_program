@@ -1,0 +1,62 @@
+<view class="page-root">
+  <view class="nav-bar">
+    <view class="nav-back" bindtap="onTapBack">
+      <text class="nav-back-arrow">‹</text>
+    </view>
+    <text class="nav-title">店铺位置</text>
+    <text class="nav-selected" wx:if="{{selectedStoreName}}">已选: {{selectedStoreName}}</text>
+  </view>
+
+  <!-- 地图区域 -->
+  <map
+    class="map-view"
+    latitude="{{mapLat}}"
+    longitude="{{mapLng}}"
+    scale="{{mapScale}}"
+    markers="{{markers}}"
+    bindmarkertap="onMarkerTap"
+  ></map>
+
+  <!-- 下方店铺列表 -->
+  <view class="store-panel">
+    <!-- 搜索栏 -->
+    <view class="store-search">
+      <text class="search-icon-text">🔍</text>
+      <input
+        class="store-search-input"
+        placeholder="搜索店铺名或地址"
+        placeholder-class="store-search-placeholder"
+        bindinput="onSearchInput"
+        value="{{searchKeyword}}"
+      />
+    </view>
+
+    <scroll-view scroll-y type="list" show-scrollbar="{{false}}" class="store-list-scroll">
+      <view
+        wx:for="{{filteredStores}}"
+        wx:key="id"
+        class="store-item {{selectedStoreId === item.id ? 'store-item--active' : ''}}"
+        bindtap="onStoreTap"
+        data-id="{{item.id}}"
+      >
+        <view class="store-icon">📍</view>
+        <view class="store-info">
+          <text class="store-name">{{item.name}}</text>
+          <text class="store-address">{{item.address}}</text>
+          <text class="store-distance" wx:if="{{item.distanceStr}}">距您约 {{item.distanceStr}}</text>
+        </view>
+        <view class="store-check" wx:if="{{selectedStoreId === item.id}}">
+          <text>✓</text>
+        </view>
+      </view>
+      <view style="height:160rpx;"></view>
+    </scroll-view>
+  </view>
+
+  <!-- 确认按钮 -->
+  <view class="confirm-bar">
+    <button class="confirm-btn {{selectedStoreId ? '' : 'confirm-btn--disabled'}}" bindtap="confirmSelection">
+      <text>{{selectedStoreId ? '确认选择' : '请先选择店铺'}}</text>
+    </button>
+  </view>
+</view>

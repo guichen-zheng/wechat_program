@@ -1,0 +1,143 @@
+page { background: #F5F7FA; }
+
+.my-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #F5F7FA;
+}
+
+.nav-header {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0 32rpx;
+  background: #fff;
+}
+
+.nav-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #1A1A1A;
+}
+
+/* ---- 账户区 ---- */
+.account-section {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32rpx 32rpx;
+  margin-top: 20rpx;
+}
+
+.account-left { display: flex; flex-direction: column; }
+
+.account-label {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #1A1A1A;
+}
+
+.account-hint {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 6rpx;
+}
+
+.avatar-wrap {
+  width: 96rpx;
+  height: 96rpx;
+}
+
+.avatar-img {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  border: 4rpx solid #E8E8E8;
+}
+
+.avatar-placeholder {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  border: 4rpx dashed #BFBFBF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F5F7FA;
+}
+
+.avatar-plus {
+  font-size: 44rpx;
+  color: #BFBFBF;
+  line-height: 1;
+}
+
+/* ---- 粗分割线 ---- */
+.divider-bold {
+  height: 16rpx;
+  background: #F5F7FA;
+}
+
+/* ---- 列表项 ---- */
+.list-item {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 36rpx 32rpx;
+  min-height: 96rpx;
+}
+
+.list-label {
+  font-size: 30rpx;
+  color: #1A1A1A;
+}
+
+.list-value {
+  font-size: 30rpx;
+  color: #666;
+}
+
+.balance-val {
+  color: #FF6B35;
+  font-weight: bold;
+  font-size: 32rpx;
+}
+
+.list-right {
+  display: flex;
+  align-items: center;
+}
+
+.list-arrow {
+  font-size: 36rpx;
+  color: #BFBFBF;
+}
+
+.divider {
+  height: 1rpx;
+  background: #F0F0F0;
+  margin: 0 32rpx;
+}
+
+/* ---- 退出 ---- */
+.logout-wrap {
+  margin: 60rpx 32rpx 0;
+}
+
+.logout-btn {
+  background: #fff;
+  border-radius: 16rpx;
+  height: 96rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logout-text {
+  font-size: 32rpx;
+  color: #FF4D4F;
+  font-weight: 500;
+}

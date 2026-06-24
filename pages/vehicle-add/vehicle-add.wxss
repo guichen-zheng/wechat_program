@@ -1,0 +1,259 @@
+page { background: #F5F7FA; }
+
+.page-root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-bar {
+  height: calc(44px + env(safe-area-inset-top));
+  padding-top: env(safe-area-inset-top);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  padding-left: 24rpx;
+  position: relative;
+  box-shadow: 0 1rpx 0 #F0F0F0;
+}
+
+.nav-back {
+  width: 60rpx;
+  height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-back-arrow {
+  font-size: 48rpx;
+  color: #333;
+  line-height: 1;
+}
+
+.nav-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #1A1A1A;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.form-wrap {
+  padding: 32rpx 24rpx;
+}
+
+.section-title {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 28rpx;
+}
+
+.section-title-text {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #1A1A1A;
+}
+
+.section-sub-text {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+/* ---- 车牌格子 ---- */
+.plate-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10rpx;
+  margin-bottom: 40rpx;
+}
+
+.plate-box {
+  flex: 1;
+  height: 92rpx;
+  background: #fff;
+  border: 2rpx solid #D9D9D9;
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plate-box-char {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #1A1A1A;
+}
+
+.plate-box--active {
+  border-color: #FF4D4F;
+  border-width: 3rpx;
+  background: #FFF1F0;
+}
+
+.plate-box--energy {
+  flex-direction: column;
+  border-style: dashed;
+  border-color: #FF9A8B;
+  margin-left: 6rpx;
+}
+
+.plate-energy-plus {
+  font-size: 28rpx;
+  color: #FF6B35;
+  line-height: 1;
+}
+
+.plate-energy-label {
+  font-size: 18rpx;
+  color: #FF6B35;
+  margin-top: 4rpx;
+}
+
+/* ---- 车型行 ---- */
+.car-row {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 32rpx 28rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 48rpx;
+}
+
+.car-label {
+  font-size: 30rpx;
+  color: #1A1A1A;
+  font-weight: 500;
+}
+
+.car-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 480rpx;
+}
+
+.car-value {
+  font-size: 28rpx;
+  color: #1A1A1A;
+  text-align: right;
+}
+
+.car-value--empty {
+  color: #BFBFBF;
+}
+
+.car-arrow {
+  font-size: 32rpx;
+  color: #BFBFBF;
+  margin-left: 8rpx;
+}
+
+.save-btn {
+  background: #1677FF;
+  color: #fff;
+  border-radius: 12rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  border: none;
+  width: 100%;
+}
+
+.save-btn::after { border: none; }
+
+/* ---- 自定义键盘 ---- */
+.keyboard {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  background: #EDEFF2;
+  padding: 0 10rpx calc(16rpx + env(safe-area-inset-bottom));
+  box-shadow: 0 -4rpx 16rpx rgba(0,0,0,.08);
+}
+
+.keyboard-top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16rpx 14rpx;
+}
+
+.keyboard-tip {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.keyboard-done {
+  font-size: 30rpx;
+  color: #1677FF;
+  font-weight: 500;
+  padding: 4rpx 12rpx;
+}
+
+.kb-pane {
+  display: flex;
+  flex-direction: column;
+}
+
+.kb-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8rpx;
+}
+
+.kb-grid--row {
+  margin-bottom: 12rpx;
+}
+
+.kb-grid--special {
+  margin-top: 12rpx;
+}
+
+.kb-key {
+  width: 64rpx;
+  height: 80rpx;
+  background: #fff;
+  border-radius: 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1rpx 2rpx rgba(0,0,0,.1);
+}
+
+.kb-key-text {
+  font-size: 30rpx;
+  color: #1A1A1A;
+}
+
+.kb-key--special {
+  background: #F5F5F5;
+}
+
+.kb-key--disabled {
+  background: #E4E6EA;
+  opacity: 0.5;
+}
+
+.kb-key--disabled .kb-key-text {
+  color: #B0B3B8;
+}
+
+.kb-key--func {
+  width: 96rpx;
+  background: #D7DAE0;
+}
+
+.kb-grid--special .kb-key {
+  height: 72rpx;
+}

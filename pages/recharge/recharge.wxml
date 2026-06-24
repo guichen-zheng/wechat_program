@@ -1,0 +1,69 @@
+<view class="page-root">
+  <view class="nav-bar">
+    <view class="nav-back" bindtap="onTapBack">
+      <text class="nav-back-arrow">‹</text>
+    </view>
+    <text class="nav-title">充值</text>
+  </view>
+
+  <scroll-view scroll-y type="list" show-scrollbar="{{false}}" style="flex:1;overflow-y:hidden;">
+
+    <!-- 余额展示 -->
+    <view class="balance-hero">
+      <text class="balance-label">当前余额（元）</text>
+      <text class="balance-val">{{user.balance}}</text>
+    </view>
+
+    <!-- 预设金额 -->
+    <view class="section-card">
+      <text class="section-label">选择充值金额</text>
+      <view class="preset-grid">
+        <view
+          wx:for="{{presetAmounts}}"
+          wx:key="*this"
+          class="preset-item {{selectedPreset === index ? 'preset-item--active' : ''}}"
+          bindtap="selectPreset"
+          data-index="{{index}}"
+        >
+          <text class="preset-val">¥{{item}}</text>
+        </view>
+      </view>
+
+      <view class="custom-wrap">
+        <text class="custom-label">其他金额：</text>
+        <view class="custom-input-wrap">
+          <text class="custom-unit">¥</text>
+          <input
+            class="custom-input"
+            type="digit"
+            placeholder="自定义金额"
+            placeholder-class="custom-placeholder"
+            bindinput="onCustomInput"
+            value="{{customAmount}}"
+          />
+        </view>
+      </view>
+    </view>
+
+    <!-- 支付方式 -->
+    <view class="section-card">
+      <text class="section-label">支付方式</text>
+      <view class="pay-row">
+        <text class="pay-icon">💚</text>
+        <text class="pay-name">微信支付</text>
+        <view class="pay-check">
+          <text>✓</text>
+        </view>
+      </view>
+    </view>
+
+    <view style="height:160rpx;"></view>
+  </scroll-view>
+
+  <!-- 底部充值按钮 -->
+  <view class="bottom-bar">
+    <button class="recharge-btn {{loading ? 'recharge-btn--loading' : ''}}" bindtap="recharge" disabled="{{loading}}">
+      <text>{{loading ? '支付中...' : '立即充值'}}</text>
+    </button>
+  </view>
+</view>

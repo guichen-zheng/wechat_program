@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir)",
+      "Bash(Get-ChildItem -Recurse -Directory)",
+      "Bash(Select-Object -First 20)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(git clone *)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\lenovo\\\\WeChatProjects\\\\wechat-mini-program-skill\" -Recurse | ForEach-Object { $_.FullName })",
+      "PowerShell(node \"C:\\\\Users\\\\lenovo\\\\WeChatProjects\\\\wechat-mini-program-skill\\\\skylinemodel\\\\install-skills.js\" --dir \"C:\\\\Users\\\\lenovo\\\\WeChatProjects\\\\miniprogram-1\\\\.claude\\\\skills\")",
+      "PowerShell(Get-ChildItem -Recurse \"C:\\\\Users\\\\lenovo\\\\WeChatProjects\\\\miniprogram-1\\\\.claude\" | ForEach-Object { $_.FullName })",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\lenovo\\\\WeChatProjects\\\\miniprogram-1\" -Recurse)",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "Bash(Sort-Object)"
+    ]
+  }
+}

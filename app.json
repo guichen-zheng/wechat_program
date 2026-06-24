@@ -1,0 +1,42 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/register/register",
+    "pages/home/home",
+    "pages/my/my",
+    "pages/my-vehicles/my-vehicles",
+    "pages/vehicle-add/vehicle-add",
+    "pages/book-wash/book-wash",
+    "pages/wash-detail/wash-detail",
+    "pages/recharge/recharge",
+    "pages/transactions/transactions",
+    "pages/store-location/store-location",
+    "pages/transaction-detail/transaction-detail",
+    "pages/car-select/car-select",
+    "pages/index/index"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于显示附近店铺位置及距离排序"
+    }
+  },
+  "requiredPrivateInfos": ["getLocation"],
+  "style": "v2",
+  "renderer": "skyline",
+  "rendererOptions": {
+    "skyline": {
+      "defaultDisplayBlock": true,
+      "defaultContentBox": true,
+      "disableABTest": true,
+      "sdkVersionBegin": "3.0.0",
+      "sdkVersionEnd": "15.255.255"
+    }
+  },
+  "componentFramework": "glass-easel",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

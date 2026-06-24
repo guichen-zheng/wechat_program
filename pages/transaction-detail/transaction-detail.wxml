@@ -1,0 +1,118 @@
+<view class="page-root">
+
+  <!-- 导航栏 -->
+  <view class="nav-bar">
+    <view class="nav-back" bindtap="onTapBack">
+      <text class="nav-back-arrow">‹</text>
+    </view>
+    <text class="nav-title">{{tx.type === 'wash' ? '洗车详情' : '充值详情'}}</text>
+  </view>
+
+  <scroll-view scroll-y type="list" show-scrollbar="{{false}}" class="scroll-main">
+
+    <!-- 头部卡片 -->
+    <view class="header-card">
+      <view class="header-icon-wrap {{tx.type === 'wash' ? 'icon-bg--blue' : 'icon-bg--green'}}">
+        <text class="header-icon-text">{{tx.type === 'wash' ? '洗' : '充'}}</text>
+      </view>
+      <view class="header-meta">
+        <text class="header-desc">{{tx.desc}}</text>
+        <text class="header-time">{{tx.time}}</text>
+        <text wx:if="{{isAdmin}}" class="header-phone">用户：{{phone}}</text>
+      </view>
+      <text class="header-amount {{tx.amount > 0 ? 'amount--green' : 'amount--red'}}">
+        {{tx.amount > 0 ? '+¥' + tx.amount : '-¥' + (-tx.amount)}}
+      </text>
+    </view>
+
+    <!-- 洗车：备注 + 照片 -->
+    <view wx:if="{{tx.type === 'wash'}}">
+
+      <!-- 备注 -->
+      <view class="section">
+        <view class="section-hd">
+          <text class="section-title">管理员备注</text>
+        </view>
+
+        <view wx:if="{{isAdmin}}" class="notes-edit">
+          <textarea
+            class="notes-textarea"
+            placeholder="输入备注，如洗车状态、特殊情况等..."
+            placeholder-class="placeholder-cls"
+            value="{{editingNotes}}"
+            bindinput="onNotesInput"
+            maxlength="500"
+            auto-height
+          />
+          <view wx:if="{{notesChanged}}" class="btn-save" bindtap="saveNotes">
+            <text class="btn-save-text">保存备注</text>
+          </view>
+        </view>
+
+        <view wx:else class="notes-view">
+          <text class="notes-text {{detail.notes ? '' : 'text-empty'}}">{{detail.notes || '暂无备注'}}</text>
+        </view>
+      </view>
+
+      <view class="section-divider"></view>
+
+      <!-- 照片 -->
+      <view class="section">
+        <view class="section-hd">
+          <text class="section-title">洗车照片</text>
+          <text wx:if="{{isAdmin && detail.photos.length < 9}}" class="add-photo-btn" bindtap="addPhoto">+ 添加照片</text>
+        </view>
+
+        <view wx:if="{{detail.photos.length === 0}}" class="photos-empty">
+          <text class="text-empty">{{isAdmin ? '点击右上角添加照片' : '暂无照片'}}</text>
+        </view>
+
+        <view class="photo-grid">
+          <view wx:for="{{detail.photos}}" wx:key="index" class="photo-cell">
+            <image
+              class="photo-img"
+              src="{{item}}"
+              mode="aspectFill"
+              bindtap="previewPhoto"
+              data-index="{{index}}"
+            />
+            <view wx:if="{{isAdmin}}" class="photo-del" bindtap="deletePhoto" data-index="{{index}}">
+              <text class="photo-del-icon">×</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+    </view>
+
+    <!-- 充值：简单信息列表 -->
+    <view wx:else class="section">
+      <view class="info-list">
+        <view class="info-row">
+          <text class="info-label">类型</text>
+          <text class="info-val">账户充值</text>
+        </view>
+        <view class="info-sep"></view>
+        <view class="info-row">
+          <text class="info-label">充值金额</text>
+          <text class="info-val amount--green">+¥{{tx.amount}}</text>
+        </view>
+        <view class="info-sep"></view>
+        <view class="info-row">
+          <text class="info-label">交易时间</text>
+          <text class="info-val">{{tx.time}}</text>
+        </view>
+        <view wx:if="{{isAdmin}}">
+          <view class="info-sep"></view>
+          <view class="info-row">
+            <text class="info-label">用户手机</text>
+            <text class="info-val">{{phone}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view style="height:60rpx;"></view>
+  </scroll-view>
+
+</view>

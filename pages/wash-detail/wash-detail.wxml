@@ -1,0 +1,74 @@
+<view class="page-root">
+  <view class="nav-bar">
+    <view class="nav-back" bindtap="onTapBack">
+      <text class="nav-back-arrow">‹</text>
+    </view>
+    <text class="nav-title">{{plan.name}}</text>
+  </view>
+
+  <scroll-view scroll-y type="list" show-scrollbar="{{false}}" style="flex:1;overflow-y:hidden;">
+
+    <!-- 方案详情 -->
+    <view class="detail-hero">
+      <text class="hero-price">¥{{plan.price}}</text>
+      <view class="hero-tag" wx:if="{{plan.tag}}">
+        <text>{{plan.tag}}</text>
+      </view>
+    </view>
+
+    <view class="detail-card">
+      <view class="detail-row">
+        <text class="detail-key">方案名称</text>
+        <text class="detail-val">{{plan.name}}</text>
+      </view>
+      <view class="detail-divider"></view>
+      <view class="detail-row">
+        <text class="detail-key">服务内容</text>
+        <text class="detail-val">{{plan.description}}</text>
+      </view>
+      <view class="detail-divider"></view>
+      <view class="detail-row">
+        <text class="detail-key">预计时长</text>
+        <text class="detail-val">{{plan.duration === -1 ? '不限时长' : '约' + plan.duration + '分钟'}}</text>
+      </view>
+      <view class="detail-divider"></view>
+      <view class="detail-row">
+        <text class="detail-key">价格</text>
+        <text class="detail-val price-val">¥{{plan.price}}</text>
+      </view>
+    </view>
+
+    <!-- 选择车辆 -->
+    <view class="section-card" wx:if="{{vehicles.length > 0}}">
+      <text class="section-label">选择车辆</text>
+      <picker wx:if="{{vehicles.length > 1}}" range="{{vehicleNames}}" value="{{vehicleIndex}}" bindchange="onVehicleChange">
+        <view class="picker-row">
+          <text class="picker-val">{{vehicleNames[vehicleIndex]}}</text>
+          <text class="picker-arrow">›</text>
+        </view>
+      </picker>
+      <view wx:else class="picker-row">
+        <text class="picker-val">{{vehicleNames[0]}}</text>
+      </view>
+    </view>
+
+    <!-- 已选店铺 -->
+    <view class="section-card">
+      <text class="section-label">已选店铺</text>
+      <view class="picker-row">
+        <text class="picker-val {{selectedStore ? '' : 'picker-empty'}}">
+          {{selectedStore ? selectedStore.name : '未选择，点击预约时自动跳转选择'}}
+        </text>
+      </view>
+    </view>
+
+    <view style="height:160rpx;"></view>
+  </scroll-view>
+
+  <!-- 底部预约按钮 -->
+  <view class="bottom-bar">
+    <button class="book-btn" bindtap="bookWash">
+      <text>立即预约 ¥{{plan.price}}</text>
+    </button>
+  </view>
+</view>
